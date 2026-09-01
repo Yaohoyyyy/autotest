@@ -34,7 +34,7 @@ public class AddRemoveElementsTest extends UITestBase {
     @Description("Проверка отображения формы по умолчанию")
     @Severity(SeverityLevel.MINOR)
     @Owner("Луковицын Олег")
-    @TmsLink("/issue/190")
+    @TmsLink("/issue/191")
     @Issue("190")
     public void defaultViewForm() {
         addRemoveElementsPage.header.shouldHave(text("Add/Remove Elements"), visible);
