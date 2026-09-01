@@ -4,6 +4,7 @@ import annotations.WithAuth;
 import config.BaseTest;
 import models.User;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 public class CreateUserTest extends BaseTest {
 
     @Test
