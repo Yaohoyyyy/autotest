@@ -1,5 +1,7 @@
 package utils;
 
+import models.Card;
+
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +21,50 @@ public class DatabaseHelper {
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+    }
+
+    // Метод для добавления карты в БД
+    public Long insertCard(String cardType, Long balance, Long userId) {
+        String sql = "INSERT INTO cards (card_type, balance, user_id) VALUES (?, ?, ?) RETURNING id";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, cardType);
+            stmt.setLong(2, balance);
+            stmt.setLong(3, userId);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            System.out.println("✅ Succesfull card insert: " + cardType + balance + userId);
+
+            return Long.parseLong(rs.getString("id"));
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error inserting user: " + cardType + balance + userId, e);
+        }
+    }
+
+    // Метод для получения случайной карты из БД
+    public Card getRandomCard() {
+        String sql = "SELECT * FROM cards LIMIT 1";
+
+        try (
+            Connection conn = getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql))
+            {
+                ResultSet rs = stmt.executeQuery();
+                System.out.println("Succesfull recieving card:");
+
+                Card card = new Card();
+                rs.next();
+                card.setId(Long.parseLong(rs.getString("id")));
+
+                return card;
+        }
+        catch (SQLException e) {
+            throw new RuntimeException("Error selecting card: ");
+        }
     }
 
     // Метод для вставки данных
