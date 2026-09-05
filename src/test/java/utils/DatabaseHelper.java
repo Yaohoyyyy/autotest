@@ -67,6 +67,27 @@ public class DatabaseHelper {
         }
     }
 
+    // Метод для удаления карты
+    public void deleteCardByCardId(Long cardId) {
+        String sql = "DELETE FROM cards WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, cardId);
+            int deletedCount = stmt.executeUpdate();
+            if (deletedCount > 0) {
+                System.out.println("✅ Card deleted successfully. ID: \" + cardId");
+            }
+            else {
+                System.out.println("⚠ Card with ID " + cardId + " not found. Nothing to delete");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting user: " + cardId, e);
+        }
+    }
+
     // Метод для вставки данных
     public void insertUser(String firstName, String lastName, String email) {
         String sql = "INSERT INTO users (first_name, last_name, email, created_at, updated_at) VALUES (?, ?, ?, NOW(), null)";

@@ -3,6 +3,7 @@ package tests;
 import annotations.WithAuth;
 import config.BaseTest;
 import models.Card;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utils.DatabaseHelper;
@@ -22,6 +23,10 @@ public class CreateCardTest extends BaseTest {
         deletingCardId = dbHelper.insertCard(deletingCardType, deletingCardBalance, deletingCardUserId);
     }
 
+    @AfterAll
+    public static void deleteData() {
+        dbHelper.deleteCardByCardId(deletingCardId);
+    }
 
     @Test
     @WithAuth
