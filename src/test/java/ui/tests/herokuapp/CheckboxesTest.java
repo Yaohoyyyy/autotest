@@ -3,12 +3,14 @@ package ui.tests.herokuapp;
 import config.UITestBase;
 
 import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.pages.herokuapp.CheckboxesPage;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
+import static org.junit.jupiter.api.Assumptions.*;
 
 public class CheckboxesTest extends UITestBase {
 
@@ -32,7 +34,7 @@ public class CheckboxesTest extends UITestBase {
     @Test
     public void defaultViewCheckboxes() {
         // Заголовок
-        checkboxesPage.header.shouldHave(text("Checkboxes"));
+        checkboxesPage.header.shouldHave(exactText("Checkboxes"));
         // Общее кол-во
         checkboxesPage.checkboxList.shouldHave(size(2));
         // Состояние
@@ -42,6 +44,25 @@ public class CheckboxesTest extends UITestBase {
         //checkboxesPage.checkbox_1.shouldHave(text("checkbox 1"));
         //checkboxesPage.checkbox_2.shouldHave(text("checkbox 2"));
 
+    }
+
+    @Test
+    public void assumeTrueTest() {
+        assumeTrue(true);
+        checkboxesPage.checkbox_2.shouldBe(checked);
+    }
+
+    @Test
+    public void assumeFalseTest() {
+        assumeFalse(true);
+        checkboxesPage.checkbox_2.shouldBe(checked);
+    }
+
+    @Test
+    public void assumeThatTest() {
+        assumingThat(true,
+                () -> checkboxesPage.checkbox_1.shouldNotBe(visible));
+        checkboxesPage.checkbox_2.shouldNotBe(checked);
     }
 
 }

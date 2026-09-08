@@ -15,7 +15,7 @@ public class UITestBase {
     public static void uiSetup() {
         //Configuration.baseUrl = BASE_URL;
         Configuration.browser = "chrome";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.browserSize = "1920x1080";
         Configuration.holdBrowserOpen = false;
         Configuration.pageLoadTimeout = 30000;

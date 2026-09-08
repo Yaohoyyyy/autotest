@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import utils.DatabaseHelper;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 
 public class CreateCardTest extends BaseTest {
 

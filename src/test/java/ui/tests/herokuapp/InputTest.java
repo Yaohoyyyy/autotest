@@ -15,6 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 import ui.pages.herokuapp.InputsPage;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.actions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InputTest extends UITestBase {
@@ -67,5 +68,16 @@ public class InputTest extends UITestBase {
         String value = rawElement.getAttribute("value");
         System.out.println("Value: '" + value + "'");
         assertEquals("", value);
+    }
+
+    @Test
+    public void testActions() {
+//        inputsPage.input.sendKeys(Keys.ARROW_UP);
+        actions().
+                moveToElement(inputsPage.input).
+                click().
+                sendKeys(Keys.ARROW_UP).
+                perform();
+        inputsPage.input.shouldHave(value("1"));
     }
 }
