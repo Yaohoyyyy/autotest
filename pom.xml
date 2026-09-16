@@ -8,6 +8,7 @@
     <groupId>com.yourcompany</groupId>
     <artifactId>rest-assured-tests</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <build>
         <plugins>
             <plugin>
@@ -55,7 +56,21 @@
         <!-- Указываем версию SLF4J -->
         <slf4j.version>2.0.9</slf4j.version>
         <aspectj.version>1.9.22</aspectj.version>
+        <!-- Единая версия Selenium для всего проекта (Appium 9.3.0 + Selenide 7.x) -->
+        <selenium.version>4.25.0</selenium.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-bom</artifactId>
+                <version>${selenium.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!--<dependency>
@@ -138,13 +153,23 @@
             <version>1.10.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- Selenide для UI-тестов -->
+
+        <!-- Selenide для UI-тестов (7.x совместим с Selenium 4.25.0) -->
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>6.19.1</version>
+            <version>7.2.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Selenium: единая версия для всего проекта (управляется selenium-bom) -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber7-jvm</artifactId>
@@ -162,6 +187,14 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-selenide</artifactId>
             <version>2.27.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Appium для Android-тестов -->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>9.3.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
