@@ -4,6 +4,7 @@ import annotations.WithAuth;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.config.HttpClientConfig;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.Header;
 import io.restassured.specification.RequestSpecification;
@@ -32,6 +33,10 @@ public class BaseTest {
     public static void setup() {
         // 1. Базовый URI для всех запросов
         RestAssured.baseURI = baseURI;
+
+        RestAssured.config = RestAssured.config()
+                .httpClient(HttpClientConfig.httpClientConfig()
+                        .setParam("http.connection.timeout", 5000));
 
         // 2. Настройка RequestSpecification (общие настройки для запросов)
         requestSpec = new RequestSpecBuilder()

@@ -40,16 +40,17 @@ public class InputTest extends UITestBase {
     @Test
     public void inputText() throws InterruptedException {
         //inputsPage.input.setValue("123");
-        Actions action = new Actions(Selenide.webdriver().driver().getWebDriver());
+        Actions action = new Actions(WebDriverRunner.getWebDriver());
         action.click(inputsPage.input).perform();
 
         Thread.sleep(5000);
 
-        action.sendKeys("Petya").perform();
+        action.sendKeys("2").perform();
 
-        inputsPage.input.sendKeys("Vasya");
+        inputsPage.input.sendKeys("1");
+        inputsPage.input.setValue("3");
         //Thread.sleep(5000);
-        inputsPage.input.shouldHave(text("Vasya"));
+        inputsPage.input.shouldHave(value("3"));
     }
 
     @Test

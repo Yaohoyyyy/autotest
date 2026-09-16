@@ -3,6 +3,8 @@ package ui.tests.herokuapp;
 import config.UITestBase;
 
 import com.codeborne.selenide.Selenide;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import ui.pages.herokuapp.CheckboxesPage;
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
 import static org.junit.jupiter.api.Assumptions.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class CheckboxesTest extends UITestBase {
 
@@ -63,6 +66,11 @@ public class CheckboxesTest extends UITestBase {
         assumingThat(true,
                 () -> checkboxesPage.checkbox_1.shouldNotBe(visible));
         checkboxesPage.checkbox_2.shouldNotBe(checked);
+    }
+
+    @Test
+    public void assertThatTest() {
+        assertThat(checkboxesPage.checkboxList).hasSize(2);
     }
 
 }

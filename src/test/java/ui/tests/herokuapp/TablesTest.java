@@ -76,8 +76,8 @@ public class TablesTest extends UITestBase {
                 .as("soft asssert")
                 .hasSize(3);*/
 
-        assertSoftly(softly -> {
-            softly.assertThat(columnData)
+        assertSoftly(s -> {
+            s.assertThat(columnData)
                     .as("soft asssert")
                     .hasSize(3);
         });

@@ -1,7 +1,11 @@
 package tests;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.Before;
 import io.restassured.http.ContentType;
+import models.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
@@ -72,7 +76,7 @@ public class ExampleTest {
     }
 
     @Test
-    public void exampleTest_4() {
+    public void exampleTest_4_auth() {
         Map<String, Object> json = new HashMap<>(Map.ofEntries(
                 Map.entry("login", "Vasya"),
                 Map.entry("password", "admin")
@@ -98,7 +102,25 @@ public class ExampleTest {
     }
 
     @Test
-    public void exampleTest_5() {
+    public void exampleTest_5_assume() {
         assumeTrue(false);
+    }
+
+    @Test
+    public void exampleTest_6_JacksonSerialization() throws JsonProcessingException {
+
+        User user = User.builder()
+                .firstName("Vasya")
+                .lastName("Petrov")
+                .build();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+
+        //String stringJson = objectMapper.writeValueAsString(user);
+        String stringJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+
+        System.out.println("stringJson: " + stringJson);
     }
 }
