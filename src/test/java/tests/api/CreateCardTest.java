@@ -1,4 +1,4 @@
-package tests;
+package tests.api;
 
 import annotations.WithAuth;
 import com.fasterxml.jackson.core.JsonProcessingException;
