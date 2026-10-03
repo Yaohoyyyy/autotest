@@ -12,11 +12,16 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ui.pages.herokuapp.InputsPage;
+import utils.VisualHelper;
+
+import java.io.IOException;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.actions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class InputTest extends UITestBase {
 
@@ -80,5 +85,12 @@ public class InputTest extends UITestBase {
                 sendKeys(Keys.ARROW_UP).
                 perform();
         inputsPage.input.shouldHave(value("1"));
+    }
+
+    @Test
+    public void screenTest() throws IOException {
+        ImageDiff diff = VisualHelper.compareWithEtalon("inputPage");
+
+        assertFalse(diff.hasDiff(), "UI is changed");
     }
 }

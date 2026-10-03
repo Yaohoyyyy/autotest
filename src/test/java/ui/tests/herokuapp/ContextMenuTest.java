@@ -2,22 +2,13 @@ package ui.tests.herokuapp;
 
 import config.UITestBase;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.FindBy;
 import ui.pages.herokuapp.CommonComponentsPage;
 import ui.pages.herokuapp.ContextMenuPage;
 
-import java.util.List;
-import java.util.stream.Stream;
-
-import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.switchTo;

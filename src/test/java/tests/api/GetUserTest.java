@@ -1,5 +1,6 @@
 package tests.api;
 
+import annotations.AdditionalLog;
 import annotations.WithAuth;
 import config.BaseTest;
 import models.User;
@@ -68,6 +69,7 @@ public class GetUserTest extends BaseTest {
 
     @Test
     @WithAuth
+    @AdditionalLog
     public void testGetUserByNonExistentId() {
 
         String nonExistentId = "999999";

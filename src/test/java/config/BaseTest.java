@@ -1,5 +1,6 @@
 package config;
 
+import annotations.AdditionalLog;
 import annotations.WithAuth;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -71,6 +72,12 @@ public class BaseTest {
                     .extract()
                     .path("token");
         }
+    }
+
+    @BeforeEach
+    public void additionalLogging(TestInfo testInfo) {
+        if (testInfo.getTestMethod().get().isAnnotationPresent(AdditionalLog.class))
+            System.out.println("===============================additionalLogging===============================");
     }
 
     // Вспомогательный метод для GET-запросов

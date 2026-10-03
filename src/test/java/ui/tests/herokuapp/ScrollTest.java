@@ -5,16 +5,12 @@ import config.UITestBase;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.pages.herokuapp.CommonComponentsPage;
-import ui.pages.herokuapp.ContextMenuPage;
 import ui.pages.herokuapp.ScrollPage;
 import org.openqa.selenium.interactions.Actions;
-
-import javax.swing.*;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
